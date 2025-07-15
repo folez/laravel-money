@@ -193,6 +193,30 @@ class MoneyTest extends TestCase
         $this->assertEquals('$ 11', $money->toString());
     }
 
+    public function testCompare(): void
+    {
+        $m1 = money_parse('0');
+        $m2 = money_parse('10');
+
+        $this->assertEquals(1, $m2->compare($m1));
+    }
+
+    public function testNegativeCompare(): void
+    {
+        $m1 = money_parse('0');
+        $m2 = money_parse('10');
+
+        $this->assertEquals(-1, $m1->compare($m2));
+    }
+
+    public function testZeroCompare(): void
+    {
+        $m1 = money_parse('10');
+        $m2 = money_parse('10');
+
+        $this->assertEquals(0, $m1->compare($m2));
+    }
+
     public function testNegativeCeil(): void
     {
         $money = money('-102500');
